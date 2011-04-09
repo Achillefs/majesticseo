@@ -5,7 +5,6 @@ module Majesticseo
   =Example
     maj = Majesticseo::Client.new(:app_api_key => "BLAH")
     maj.get_subscription_info
-    # GlobalVars works as an array or object
     if maj.success?
       puts maj.global_vars.max_bulk_backlinks_check
       => 120
