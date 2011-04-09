@@ -1,7 +1,4 @@
-
-For more information on majesticseo, see http://majesticseo.rubyforge.org
-
-NOTE: Change this information in PostInstall.txt 
-You can also delete it if you don't want it.
+Thanks for installing me.
+For more information, see http://humbuckercode.co.uk/licks/gems/majestic-seo/
 
 
