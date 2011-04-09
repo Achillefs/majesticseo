@@ -31,7 +31,7 @@ A ruby-friendly interface to the Majestic SEO API.
 
 == INSTALL:
 
-* sudo gem install majesticseo --no-ri --no-rdoc --source => "http://gemcutter.org"
+* sudo gem install majesticseo --no-ri --no-rdoc
 
 == LICENSE:
 
