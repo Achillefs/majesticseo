@@ -8,6 +8,9 @@ module Majesticseo
     # GlobalVars works as an array or object
     if maj.success?
       puts maj.global_vars.max_bulk_backlinks_check
+      => 120
+      puts maj.data_tables.first.rows.first.index_item_info_res_units
+      => 99992
     else
       puts maj.response
       puts maj.error_message

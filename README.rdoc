@@ -1,32 +1,43 @@
 = majesticseo
 
-* http://github.com/#{github_username}/#{project_name}
+* http://github.com/Achillefs/majesticseo
 
 == DESCRIPTION:
 
-FIX (describe your package)
+A ruby-friendly interface to the Majestic SEO API.
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* Data structures are returned as ruby objects. Majestic SEO responses are parsed into corresponding objects, allowing developers to access them as they would access any ruby object.
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+  maj = Majesticseo::Client.new(:app_api_key => "BLAH")
+  maj.get_subscription_info
+  # GlobalVars works as an array or object
+  if maj.success?
+    puts maj.global_vars.max_bulk_backlinks_check
+  else
+    puts maj.response
+    puts maj.error_message
+  end
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* activesupport >= 2.0.2
+* nokogiri >= 1.4.0
+* open-uri
+* ostruct
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+* sudo gem install majesticseo --no-ri --no-rdoc --source => "http://gemcutter.org"
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2011 Achilles
+Copyright (c) 2011 Achilles Charmpilas, Humbucker Ltd
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
