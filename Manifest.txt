@@ -4,6 +4,8 @@ PostInstall.txt
 README.rdoc
 Rakefile
 lib/majesticseo.rb
+lib/majesticseo/client.rb
+lib/majesticseo/data_table.rb
 script/console
 script/destroy
 script/generate
