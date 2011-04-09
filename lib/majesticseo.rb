@@ -10,7 +10,7 @@ require "open-uri"
 require "ostruct"
 
 module Majesticseo
-  VERSION = '1.0.0'
+  VERSION = '1.0.1'
   class NoMethodError < ArgumentError; end
   class InvalidAPIKey < ArgumentError; end
 =begin rdoc

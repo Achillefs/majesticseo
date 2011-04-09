@@ -1,4 +1,6 @@
 === 1.0.0 2011-04-09
-
+* 2 minor enhancements:
+  * Added installation message
+  * removed some deps
 * 1 major enhancement:
   * Initial release
