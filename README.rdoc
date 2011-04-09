@@ -26,8 +26,6 @@ A ruby-friendly interface to the Majestic SEO API.
 
 * activesupport >= 2.0.2
 * nokogiri >= 1.4.0
-* open-uri
-* ostruct
 
 == INSTALL:
 
