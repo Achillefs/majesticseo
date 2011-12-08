@@ -16,6 +16,9 @@ module Majesticseo
     end
 =end
   class Client
+    BASE_URI = "http://%s.majesticseo.com/api_command" unless
+      self.const_defined?(:BASE_URI)
+
     attr_reader   :app_api_key, :env, :uri, :response
     attr_accessor :code, :error_message, :full_error, :data_tables, :global_vars
 =begin rdoc
@@ -26,8 +29,14 @@ module Majesticseo
     def initialize(opts = {})
       @app_api_key = opts.delete(:app_api_key)
       
-      raise Majesticseo::InvalidAPIKey.new("API key needs to be a valid Majestic SEO API key. See: https://www.Majesticseo.com/account/api") if @app_api_key.blank?
-      
+
+      if !@app_api_key || @app_api_key.empty?
+        msg = "API key needs to be a valid Majestic SEO API key. See: "\
+              "https://www.Majesticseo.com/account/api"
+
+        raise Majesticseo::InvalidAPIKey.new(msg)
+      end
+
       if opts[:environment]
         @env = opts.delete(:environment)
       elsif defined?(RAILS_ENV)
@@ -40,7 +49,7 @@ module Majesticseo
       @response = nil
       @data_tables = []
       @global_vars = nil
-      @uri = URI.parse("http://#{@env == "production" ? "enterprise" : "developer"}.Majesticseo.com/api_command")
+      @uri = URI.parse(build_url)
       puts "Started Majesticseo::Client in #{env} mode"
     end
 
@@ -67,6 +76,14 @@ module Majesticseo
 
     def success?
       code == "OK" and error_message == ""
+    end
+
+    def build_url
+      subdomain = Hash.new("developer")
+      subdomain[:production] = "enterprise"
+      subdomain['production'] = "enterprise"
+
+      BASE_URI % subdomain[env]
     end
   end
 end
