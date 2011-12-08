@@ -21,15 +21,15 @@ module Majesticseo
 =begin rdoc
   Initialize a Majestic SEO aPI client passing the following options:
   app_api_key: You Majesticseo API key, found at: https://www.Majesticseo.com/account/api
-  enviroment (optional): Default to RAILS_ENV, RACK_ENV or default. Determines whether the client uses the sandbox or production API server
+  environment (optional): Default to RAILS_ENV, RACK_ENV or default. Determines whether the client uses the sandbox or production API server
 =end
     def initialize(opts = {})
       @app_api_key = opts.delete(:app_api_key)
       
       raise Majesticseo::InvalidAPIKey.new("API key needs to be a valid Majestic SEO API key. See: https://www.Majesticseo.com/account/api") if @app_api_key.blank?
       
-      if opts[:enviroment]
-        @env = opts.delete(:enviroment)
+      if opts[:environment]
+        @env = opts.delete(:environment)
       elsif defined?(RAILS_ENV)
         @env = RAILS_ENV
       elsif defined?(RACK_ENV)
