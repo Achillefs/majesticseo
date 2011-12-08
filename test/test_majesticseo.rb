@@ -12,39 +12,45 @@ class TestMajesticseo < Test::Unit::TestCase
       Majesticseo::Client.new(:app_api_key => "")
     end
   end
+end
 
+class TestMajesticURL < Test::Unit::TestCase
   def test_builds_correct_url_for_development
-    client = Majesticseo::Client.new({
-      :app_api_key => "fakefake",
-      :environment => "development"
-    })
-
-    assert_equal client.build_url,
-      "http://developer.majesticseo.com/api_command"
+    assert_equal "http://developer.majesticseo.com/api_command",
+      fake_client("development").build_url
   end
 
   def test_builds_correct_url_for_production
-    client = Majesticseo::Client.new({
-      :app_api_key => "fakefake",
-      :environment => "production"
-    })
-
-    assert_equal client.build_url,
-      "http://enterprise.majesticseo.com/api_command"
-
-    client = Majesticseo::Client.new({
-      :app_api_key => "fakefake",
-      :environment => :production
-    })
-
-    assert_equal client.build_url,
-      "http://enterprise.majesticseo.com/api_command"
+    [:production, "production"].each do |e|
+      assert_equal "http://enterprise.majesticseo.com/api_command",
+        fake_client(e).build_url
+    end
   end
 
   def test_builds_correct_url_for_default
-    client = Majesticseo::Client.new :app_api_key => "fakefake"
+    assert_equal "http://developer.majesticseo.com/api_command",
+      fake_client.build_url
+  end
+end
 
-    assert_equal client.build_url,
-      "http://developer.majesticseo.com/api_command"
+class TestMajesticDebug < Test::Unit::TestCase
+  def setup
+    @_stdout = $stdout
+    @stringio = StringIO.new
+    $stdout = @stringio
+  end
+
+  def teardown
+    $stdout = @_stdout
+  end
+
+  def test_client_in_debug_mode_by_default
+    assert fake_client.debug?
+  end
+
+  def test_suppress_output_when_not_in_debug_mode
+    client = Majesticseo::Client.new(:app_api_key => "test", :debug => false)
+
+    assert_equal "", @stringio.string
   end
 end

@@ -28,7 +28,7 @@ module Majesticseo
 =end
     def initialize(opts = {})
       @app_api_key = opts.delete(:app_api_key)
-      
+      @debug = opts.fetch(:debug, true)
 
       if !@app_api_key || @app_api_key.empty?
         msg = "API key needs to be a valid Majestic SEO API key. See: "\
@@ -50,6 +50,7 @@ module Majesticseo
       @data_tables = []
       @global_vars = nil
       @uri = URI.parse(build_url)
+
       puts "Started Majesticseo::Client in #{env} mode"
     end
 
@@ -84,6 +85,14 @@ module Majesticseo
       subdomain['production'] = "enterprise"
 
       BASE_URI % subdomain[env]
+    end
+
+    def puts(msg)
+      Kernel.puts(msg) if debug?
+    end
+
+    def debug?
+      @debug
     end
   end
 end
