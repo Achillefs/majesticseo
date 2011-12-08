@@ -57,13 +57,27 @@ module Majesticseo
     def call method, params
       params = {} unless params.is_a? Hash
       request_uri = uri.clone
-      request_uri.query = params.merge({:app_api_key => app_api_key, :cmd => method}).to_param
+      request_uri.query = params.merge({
+        :app_api_key => app_api_key,
+        :cmd => method
+      }).to_param
+
       @response = Nokogiri::XML(open(request_uri))
 
       # Set response and global variable attributes
-      response.at("Result").keys.each { |a| send("#{a.underscore}=".to_sym,response.at("Result").attr(a)) } if response.at("Result")
+      if response.at("Result")
+        response.at("Result").keys.each do |a|
+          send("#{a.underscore}=".to_sym, response.at("Result").attr(a))
+        end
+      end
+
       @global_vars = GlobalVars.new
-      response.at("GlobalVars").keys.each { |a| @global_vars.send("#{a.underscore}=".to_sym,response.at("GlobalVars").attr(a)) } if response.at("GlobalVars")
+      if response.at("GlobalVars")
+        response.at("GlobalVars").keys.each do |a|
+          @global_vars.send("#{a.underscore}=".to_sym, response.at("GlobalVars").attr(a)) 
+        end
+      end
+
       parse_data if success?
     end
 
@@ -72,7 +86,9 @@ module Majesticseo
     end
 
     def parse_data
-      @data_tables = @response.search("DataTable").collect { |table| DataTable.create_from_xml(table) }
+      @data_tables = @response.search("DataTable").map do |table|
+        DataTable.create_from_xml(table)
+      end
     end
 
     def success?
