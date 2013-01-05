@@ -7,9 +7,9 @@ require './lib/majesticseo'
 Hoe.plugin :newgem
 $hoe = Hoe.spec 'majesticseo' do
   self.developer 'Achilles Charmpilas', 'ac@humbuckercode.co.uk'
-  self.post_install_message = 'PostInstall.txt' # TODO remove if post-install message not required
-  self.rubyforge_name       = self.name # TODO this is default value
-  self.extra_deps           = [['activesupport','>= 2.0.2'], ['nokogiri','>= 1.4.0']]
+  self.post_install_message = 'PostInstall.txt'
+  self.rubyforge_name       = self.name
+  self.extra_deps           = [['activesupport','>= 3.0.0'], ['nokogiri','>= 1.4.0']]
 
 end
 

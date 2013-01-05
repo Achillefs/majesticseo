@@ -1,3 +1,9 @@
+=== 1.0.2 2012-01-15
+* 2 minor enhancements 
+  * allow symbol as enviroment variable
+  * Allow supression of stdout msgs if :debug flag is set to false
+  * cherrypicked needed active support extensions (AS v.3.0.0 and up)
+  * majestic escapes pipes in text data in response. Parsing correctly
 === 1.0.0 2011-04-09
 * 2 minor enhancements:
   * Added installation message

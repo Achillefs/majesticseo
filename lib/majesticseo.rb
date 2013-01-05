@@ -17,7 +17,7 @@ unless String.method_defined?(:underscore)
 end
 
 module Majesticseo
-  VERSION = '1.0.1'
+  VERSION = '1.0.2'
   class NoMethodError < ArgumentError; end
   class InvalidAPIKey < ArgumentError; end
 =begin rdoc

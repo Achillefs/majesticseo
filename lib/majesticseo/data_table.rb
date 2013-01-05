@@ -9,7 +9,7 @@ module Majesticseo
       table.rows_count = xml.attr("RowsCount").to_i
       table.rows = xml.search("Row").map do |r|
         row = Row.new
-        data = r.content.split(/(?<!\|)\|(?!\|)/)
+        data = r.content.scan(/(?=<!\|)\|(?=!\|)/)
         table.headers.each_index { |i| row.send("#{table.headers[i].underscore}=",data[i])} 
         row
       end
