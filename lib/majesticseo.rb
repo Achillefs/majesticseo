@@ -4,10 +4,17 @@ $:.unshift(File.dirname(__FILE__)) unless
 =begin rdoc
   This module implements a ruby-friendly interface to the Majestic SEO developer API.
 =end
-require "active_support"
 require "nokogiri"
 require "open-uri"
 require "ostruct"
+
+unless Hash.method_defined?(:to_param)
+  require "active_support/core_ext/object/to_query"
+end
+
+unless String.method_defined?(:underscore)
+  require "active_support/core_ext/string/inflections"
+end
 
 module Majesticseo
   VERSION = '1.0.1'
@@ -48,4 +55,4 @@ module Majesticseo
 =end
   class GlobalVars < Majesticseo::Structure; end
 end
-%W[data_table client].each { |r| require "#{File.dirname(__FILE__)}/majesticseo/#{r}" } 
+%W[data_table client].each { |r| require "#{File.dirname(__FILE__)}/majesticseo/#{r}" }
